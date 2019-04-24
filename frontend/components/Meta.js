@@ -14,6 +14,12 @@ const GlobalStyle = createGlobalStyle`
     margin: ${props => props.theme.layoutMargin};
     padding: ${props => props.theme.layoutPadding};
   }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 `;
 
 const Meta = () => {
@@ -22,6 +28,11 @@ const Meta = () => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+        />
       </Head>
       <GlobalStyle />
     </>

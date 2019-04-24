@@ -4,7 +4,10 @@ const Theme = {
   layoutPadding: 0,
   layoutMargin: 0,
   padding: "2rem",
-  margin: "2rem"
+  margin: "2rem",
+  colors: {
+    accent: "#ccc"
+  }
 };
 
 export default Theme;

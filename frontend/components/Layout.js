@@ -1,21 +1,20 @@
 import Nav from "./Nav";
 import Meta from "./Meta";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import Theme from "./Theme";
+
+const Layout = styled.main`
+  min-height: 100vh;
+`;
 
 function withLayout(Page) {
   return () => (
     <ThemeProvider theme={Theme}>
-      <div>
+      <Layout>
         <Meta />
-        <div>
-          <Nav />
-        </div>
-        <div>
-          <p>Placeholder</p>
-        </div>
+        <Nav />
         <Page />
-      </div>
+      </Layout>
     </ThemeProvider>
   );
 }
