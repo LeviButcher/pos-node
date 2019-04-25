@@ -16,8 +16,8 @@ const TwoPanel = styled.section`
 
 const Index = () => (
   <TwoPanel>
-    <SidePanel style={{ "grid-area": "side" }} />
-    <div style={{ "grid-area": "main" }}>
+    <SidePanel style={{ gridArea: "side" }} />
+    <div style={{ gridArea: "main" }}>
       <Title>Cart Items go here</Title>
     </div>
   </TwoPanel>
