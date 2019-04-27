@@ -37,6 +37,12 @@ export const POSReducer = (state, action) => {
         cartItems: cartItemsCopy
       };
     }
+    case "CLEAR-CART": {
+      return {
+        ...state,
+        cartItems: []
+      };
+    }
     default:
       return state;
   }

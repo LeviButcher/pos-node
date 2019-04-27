@@ -27,6 +27,14 @@ const CartItemContainer = styled.div`
   grid-template-rows: auto;
 `;
 
+const ButtonContainer = styled.div`
+  padding: calc(${props => props.theme.padding} / 2)
+    ${props => props.theme.padding};
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 5px;
+`;
+
 const CartItem = ({ item }) => (
   <CartItemContainer>
     <div>
@@ -42,7 +50,7 @@ const CartItem = ({ item }) => (
 );
 
 const Cart = () => {
-  const [{ cartItems }] = usePOSState();
+  const [{ cartItems }, dispatch] = usePOSState();
   return (
     <CartSection>
       <CustomerDetails />
@@ -53,10 +61,12 @@ const Cart = () => {
           <CartItem item={item} />
         ))}
       </CartContainer>
-      <div>
-        <button>Clear Cart</button>
+      <ButtonContainer>
+        <button onClick={() => dispatch({ type: "CLEAR-CART" })}>
+          Clear Cart
+        </button>
         <button>Pay</button>
-      </div>
+      </ButtonContainer>
     </CartSection>
   );
 };
