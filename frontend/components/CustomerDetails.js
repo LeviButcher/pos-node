@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Popup from "reactjs-popup";
+import CustomerForm from "./CustomerForm";
+import { usePOSState } from "../context/POSContext";
 
 const CustomerBox = styled.div`
   background: #888;
@@ -10,17 +12,28 @@ const CustomerBox = styled.div`
 `;
 
 const CustomerDetails = () => {
+  const [{ customer }, dispatch] = usePOSState();
+
+  function handleSubmission(e, customer) {
+    e.preventDefault();
+    console.log({ customer });
+    dispatch({ type: "ADD-CUSTOMER", customer });
+  }
+  console.log("customer", customer);
   return (
     <CustomerBox>
       <div>
-        <h3>levi butcher</h3>
-        <h4>1-111-111-1111</h4>
+        <h3>{customer.firstName || "No Customer added"}</h3>
+        <h4>{customer.phone || ""}</h4>
       </div>
       <Popup trigger={<button>Add Customer</button>} modal closeOnDocumentClick>
         {close => (
-          <div>
-            <p>Hello there</p>
-          </div>
+          <CustomerForm
+            submitAction={(e, value) => {
+              handleSubmission(e, value);
+              close();
+            }}
+          />
         )}
       </Popup>
     </CustomerBox>
