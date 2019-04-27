@@ -16,10 +16,8 @@ const CustomerDetails = () => {
 
   function handleSubmission(e, customer) {
     e.preventDefault();
-    console.log({ customer });
     dispatch({ type: "ADD-CUSTOMER", customer });
   }
-  console.log("customer", customer);
   return (
     <CustomerBox>
       <div>

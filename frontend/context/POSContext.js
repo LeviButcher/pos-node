@@ -19,6 +19,24 @@ export const POSReducer = (state, action) => {
         customer: action.customer
       };
     }
+    case "ADD-ITEM": {
+      const index = state.cartItems.findIndex(
+        element => element.sku === action.item.sku
+      );
+      console.log(index);
+
+      let cartItemsCopy = state.cartItems;
+      if (index != -1) {
+        cartItemsCopy.splice(index, 1, action.item);
+      } else {
+        cartItemsCopy = [...cartItemsCopy, action.item];
+      }
+
+      return {
+        ...state,
+        cartItems: cartItemsCopy
+      };
+    }
     default:
       return state;
   }

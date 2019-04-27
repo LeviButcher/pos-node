@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import CustomerDetails from "./CustomerDetails";
+import { usePOSState } from "../context/POSContext";
 
 const CartSection = styled.section`
   height: 100%;
@@ -19,73 +20,6 @@ const CartContainer = styled.div`
     margin-bottom: 15px;
   }
 `;
-
-const CartItems = [
-  {
-    sku: 12341,
-    description: "Hairdryer",
-    picURL: "",
-    quantity: "2",
-    available: "4",
-    price: 2.29
-  },
-  {
-    sku: 12341,
-    description: "Hairdryer",
-    picURL: "",
-    quantity: "2",
-    available: "4",
-    price: 2.29
-  },
-  {
-    sku: 12341,
-    description: "Hairdryer",
-    picURL: "",
-    quantity: "2",
-    available: "4",
-    price: 2.29
-  },
-  {
-    sku: 12341,
-    description: "Hairdryer",
-    picURL: "",
-    quantity: "2",
-    available: "4",
-    price: 2.29
-  },
-  {
-    sku: 12341,
-    description: "Hairdryer",
-    picURL: "",
-    quantity: "2",
-    available: "4",
-    price: 2.29
-  },
-  {
-    sku: 12341,
-    description: "Hairdryer",
-    picURL: "",
-    quantity: "2",
-    available: "4",
-    price: 2.29
-  },
-  {
-    sku: 12341,
-    description: "Hairdryer",
-    picURL: "",
-    quantity: "2",
-    available: "4",
-    price: 2.29
-  },
-  {
-    sku: 12341,
-    description: "Hairdryer",
-    picURL: "",
-    quantity: "2",
-    available: "4",
-    price: 2.29
-  }
-];
 
 const CartItemContainer = styled.div`
   display: grid;
@@ -108,21 +42,28 @@ const CartItem = ({ item }) => (
 );
 
 const Cart = () => {
+  const [{ cartItems }] = usePOSState();
   return (
     <CartSection>
       <CustomerDetails />
       <CartContainer>
-        {CartItems.map(item => (
+        <p>Total: {cartItems.reduce(totalCartReducer, 0)}</p>
+        <hr />
+        {cartItems.map(item => (
           <CartItem item={item} />
         ))}
       </CartContainer>
       <div>
-        <p>Total: </p>
         <button>Clear Cart</button>
         <button>Pay</button>
       </div>
     </CartSection>
   );
 };
+
+function totalCartReducer(acc, cur) {
+  const sum = cur.quantity * cur.price;
+  return acc + sum;
+}
 
 export default Cart;

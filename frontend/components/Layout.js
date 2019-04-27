@@ -10,7 +10,10 @@ const Layout = styled.main`
 
 function withLayout(Page) {
   return () => (
-    <POSProvider reducer={POSReducer} initialState={{ customer: {} }}>
+    <POSProvider
+      reducer={POSReducer}
+      initialState={{ customer: {}, cartItems: [] }}
+    >
       <ThemeProvider theme={Theme}>
         <Layout>
           <Meta />

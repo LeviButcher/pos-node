@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import withLayout from "../components/Layout";
 import SidePanel from "../components/SidePanel";
+import ItemList from "../components/ItemList";
 
 const Title = styled.h1`
   color: red;
@@ -18,7 +19,7 @@ const Index = () => (
   <TwoPanel>
     <SidePanel style={{ gridArea: "side" }} />
     <div style={{ gridArea: "main" }}>
-      <Title>Cart Items go here</Title>
+      <ItemList />
     </div>
   </TwoPanel>
 );
