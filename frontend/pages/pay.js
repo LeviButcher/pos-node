@@ -2,26 +2,16 @@ import styled from "styled-components";
 import withLayout from "../components/Layout";
 import SidePanel from "../components/SidePanel";
 import ItemList from "../components/ItemList";
+import { TwoPanel } from "./index";
+import PayForm from "../components/PayForm";
 
-const Title = styled.h1`
-  color: red;
-`;
-
-export const TwoPanel = styled.section`
-  display: grid;
-  grid-template-rows: 100%;
-  grid-template-columns: 25% 1fr;
-  grid-template-areas: "side main";
-  min-height: calc(100vh - 3rem);
-`;
-
-const Index = () => (
+const Pay = () => (
   <TwoPanel>
     <SidePanel style={{ gridArea: "side" }} />
     <div style={{ gridArea: "main" }}>
-      <ItemList />
+      <PayForm />
     </div>
   </TwoPanel>
 );
 
-export default withLayout(Index);
+export default withLayout(Pay);

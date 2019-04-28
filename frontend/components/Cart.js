@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import CustomerDetails from "./CustomerDetails";
 import { usePOSState } from "../context/POSContext";
+import Link from "next/link";
 
 const CartSection = styled.section`
   height: 100%;
@@ -65,13 +66,17 @@ const Cart = () => {
         <button onClick={() => dispatch({ type: "CLEAR-CART" })}>
           Clear Cart
         </button>
-        <button>Pay</button>
+        <Link href="/pay">
+          <button>
+            <a>Pay</a>
+          </button>
+        </Link>
       </ButtonContainer>
     </CartSection>
   );
 };
 
-function totalCartReducer(acc, cur) {
+export function totalCartReducer(acc, cur) {
   const sum = cur.quantity * cur.price;
   return acc + sum;
 }

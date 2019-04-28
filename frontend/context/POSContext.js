@@ -11,6 +11,8 @@ export const POSProvider = ({ reducer, initialState, children }) => (
 
 export const usePOSState = () => useContext(POSContext);
 
+export const defaultState = { customer: {}, cartItems: [] };
+
 export const POSReducer = (state, action) => {
   switch (action.type) {
     case "ADD-CUSTOMER": {
@@ -23,7 +25,6 @@ export const POSReducer = (state, action) => {
       const index = state.cartItems.findIndex(
         element => element.sku === action.item.sku
       );
-      console.log(index);
 
       let cartItemsCopy = state.cartItems;
       if (index != -1) {
@@ -42,6 +43,9 @@ export const POSReducer = (state, action) => {
         ...state,
         cartItems: []
       };
+    }
+    case "WIPE": {
+      return defaultState;
     }
     default:
       return state;
