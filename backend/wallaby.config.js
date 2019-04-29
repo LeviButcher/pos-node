@@ -5,7 +5,8 @@ module.exports = function(wallaby) {
     tests: ["tests/**/*test.js"],
     testFramework: "jest",
     env: {
-      type: "node"
+      type: "node",
+      runner: "node"
     },
     setup: function(wallaby) {
       require("dotenv").config();

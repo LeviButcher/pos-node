@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "seed": "node src/seed/seed.js"
   },
   "author": "Levi Butcher",
   "license": "MIT",
@@ -16,8 +17,8 @@
     "restify": "^8.3.0"
   },
   "devDependencies": {
-    "@shelf/jest-mongodb": "^1.0.0",
     "jest": "^24.7.1",
-    "nodemon": "^1.18.11"
+    "nodemon": "^1.18.11",
+    "supertest": "^4.0.2"
   }
 }
