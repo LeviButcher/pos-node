@@ -10,11 +10,11 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.gzipResponse());
 server.use(restify.plugins.bodyParser());
 
-server.get("/", (req, res, next) => {
-  res.send("/customers");
-});
-
+// /customer routes
 server.get("/customers", CustomerHandler.getCustomers);
 server.post("/customers", CustomerHandler.createCustomer);
+server.get("/customers/find", CustomerHandler.findCustomer);
+server.put("/customers/:id", CustomerHandler.updateCustomer);
+server.del("/customers/:id", CustomerHandler.deleteCustomer);
 
 module.exports = server;

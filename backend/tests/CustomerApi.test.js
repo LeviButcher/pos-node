@@ -4,6 +4,8 @@ const Customer = require("../src/models/Customer");
 const seedCustomers = require("../src/seed/customers");
 const dbConnection = require("../src/db");
 
+process.env.TEST_SUITE = "CUSTOMER_API";
+
 describe("Customer API /customer", () => {
   beforeEach(async () => {
     await dbConnection();
@@ -65,5 +67,40 @@ describe("Customer API /customer", () => {
       .send(customer);
     expect(res.statusCode).toBe(409);
     expect(res.body.message).toBe("Repeat Customer");
+  });
+
+  test("GET:/customers with query of firstName, lastName, and phone should return user", async () => {
+    const { firstName, lastName, phone } = seedCustomers[0];
+    const findUser = { firstName, lastName, phone };
+    const res = await request(server)
+      .get("/customers/find")
+      .query(findUser);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.firstName).toEqual(findUser.firstName);
+  });
+
+  test("GET:/customers with query of firstName, lastName, and phone that does not exist should return nothing", async () => {
+    const [firstName, lastName, phone] = ["Bob", "Martin", "468-546-3546"];
+    const findUser = { firstName, lastName, phone };
+    const res = await request(server)
+      .get("/customers/find")
+      .query(findUser);
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual(null);
+  });
+
+  test("PUT:/customers/:id should update customer with that id", async () => {
+    const customer = (await request(server).get("/customers")).body[0];
+    const res = await request(server)
+      .put(`/customers/${customer._id}`)
+      .send(customer);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.firstName).toEqual(customer.firstName);
+  });
+
+  test("DEL:/customers/:id should delete customer with that id", async () => {
+    const customer = (await request(server).get("/customers")).body[0];
+    const res = await request(server).del(`/customers/${customer._id}`);
+    expect(res.statusCode).toBe(204);
   });
 });

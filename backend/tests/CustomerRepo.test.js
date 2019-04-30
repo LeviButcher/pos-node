@@ -5,6 +5,8 @@ const seedCustomers = require("../src/seed/customers");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 
+process.env.TEST_SUITE = "CUSTOMER_REPO";
+
 describe("Customer", () => {
   beforeEach(async () => {
     await dbConnection();
