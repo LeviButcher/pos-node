@@ -15,11 +15,13 @@ const transactionSchema = new Schema({
   },
   cartItems: [
     {
-      sku: String,
-      description: String,
-      picUrl: String,
-      price: Number,
-      available: Number,
+      item: {
+        sku: String,
+        description: String,
+        picUrl: String,
+        price: Number,
+        available: Number
+      },
       quantity: Number
     }
   ],

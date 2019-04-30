@@ -7,7 +7,7 @@ const connectDb = async () => {
     }
     await mongoose.connect(
       process.env.DB ||
-        `mongodb://localhost:27017/POS-${process.env.TEST_SUITE}`,
+        `mongodb://localhost:27017/POS-${process.env.TEST_SUITE || "TEST"}`,
       {
         useNewUrlParser: true,
         reconnectTries: Number.MAX_VALUE,

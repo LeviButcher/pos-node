@@ -7,7 +7,7 @@ const ObjectId = mongoose.Types.ObjectId;
 
 process.env.TEST_SUITE = "CUSTOMER_REPO";
 
-describe("Customer", () => {
+describe("Customer Repo", () => {
   beforeEach(async () => {
     await dbConnection();
     await Customer.create(seedCustomers);
