@@ -4,12 +4,22 @@ exports.createItem = async item => {
   return await Item.create(item);
 };
 
-exports.getItems = () => {};
+exports.getItems = async () => {
+  return await Item.find();
+};
 
-exports.getItem = () => {};
+exports.getItem = async id => {
+  return await Item.findById(id);
+};
 
-exports.updateItem = () => {};
+exports.updateItem = async item => {
+  return await Item.findByIdAndUpdate(item._id, item, { new: true });
+};
 
-exports.findItem = sku => {};
+exports.findItem = async sku => {
+  return await Item.findOne({ sku: sku });
+};
 
-exports.deleteItem = () => {};
+exports.deleteItem = async id => {
+  return await Item.findByIdAndDelete(id);
+};

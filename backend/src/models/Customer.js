@@ -22,4 +22,8 @@ const customerSchema = new Schema({
   }
 });
 
+// Enable Mongoose getter functions
+customerSchema.set("toObject", { getters: true });
+customerSchema.set("toJSON", { getters: true });
+
 module.exports = mongoose.model("Customer", customerSchema);

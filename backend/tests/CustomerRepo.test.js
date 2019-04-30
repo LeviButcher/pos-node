@@ -93,7 +93,7 @@ describe("Customer Repo", () => {
   test("deleteCustomer will delete customer should pass", async () => {
     const rowCount = (await CustomerRepo.getCustomers()).length;
     const custToDelete = (await CustomerRepo.getCustomers())[0];
-    await CustomerRepo.deleteCustomer(custToDelete._id);
+    let res = await CustomerRepo.deleteCustomer(custToDelete._id);
     const newRowCount = (await CustomerRepo.getCustomers()).length;
     expect(newRowCount).toBeLessThan(rowCount);
   });

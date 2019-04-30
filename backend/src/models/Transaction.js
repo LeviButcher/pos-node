@@ -31,4 +31,8 @@ const transactionSchema = new Schema({
   }
 });
 
+// Enable Mongoose getter functions
+transactionSchema.set("toObject", { getters: true });
+transactionSchema.set("toJSON", { getters: true });
+
 module.export = mongoose.model("Transaction", transactionSchema);

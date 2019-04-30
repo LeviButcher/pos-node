@@ -14,7 +14,6 @@ const connectDb = async () => {
         reconnectInterval: 1000
       }
     );
-
     db = mongoose.connection;
     res(db);
   });
