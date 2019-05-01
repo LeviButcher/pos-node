@@ -8,7 +8,8 @@ process.env.TEST_SUITE = "CUSTOMER_API";
 
 describe("Customer API /customer", () => {
   beforeEach(async () => {
-    await dbConnection();
+    const db = await dbConnection();
+    await db.dropDatabase();
     await Customer.create(seedCustomers);
   });
 

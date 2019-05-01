@@ -3,8 +3,10 @@
  */
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { centsToDecimal, decimalToCents } = require("../util/CentConvertor");
+
 // TODO: Add validation for repeat sku's
-const itemSchema = new Schema({
+const ItemSchema = new Schema({
   sku: {
     type: String,
     required: true
@@ -20,8 +22,8 @@ const itemSchema = new Schema({
   price: {
     type: Number,
     min: 0,
-    get: getPrice,
-    set: setPrice
+    get: centsToDecimal,
+    set: decimalToCents
   },
   available: {
     type: Number,
@@ -29,17 +31,8 @@ const itemSchema = new Schema({
   }
 });
 
-function getPrice(num) {
-  num;
-  return (num / 100).toFixed(2);
-}
-
-function setPrice(num) {
-  return num * 100;
-}
-
 // Enable Mongoose getter functions
-itemSchema.set("toObject", { getters: true });
-itemSchema.set("toJSON", { getters: true });
+ItemSchema.set("toObject", { getters: true });
+ItemSchema.set("toJSON", { getters: true });
 
-module.exports = mongoose.model("Item", itemSchema);
+module.exports = mongoose.model("Item", ItemSchema);

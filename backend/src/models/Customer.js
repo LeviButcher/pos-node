@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const customerSchema = new Schema({
+const CustomerSchema = new Schema({
   firstName: String,
   lastName: String,
   address: {
@@ -23,7 +23,7 @@ const customerSchema = new Schema({
 });
 
 // Enable Mongoose getter functions
-customerSchema.set("toObject", { getters: true });
-customerSchema.set("toJSON", { getters: true });
+CustomerSchema.set("toObject", { getters: true });
+CustomerSchema.set("toJSON", { getters: true });
 
-module.exports = mongoose.model("Customer", customerSchema);
+module.exports = mongoose.model("Customer", CustomerSchema);

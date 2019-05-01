@@ -9,7 +9,8 @@ process.env.TEST_SUITE = "ITEM_REPO";
 
 describe("Item Repo", () => {
   beforeEach(async () => {
-    await dbConnection();
+    const db = await dbConnection();
+    await db.dropDatabase();
     await Item.create(seedItems);
   });
 

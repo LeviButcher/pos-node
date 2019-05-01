@@ -1,38 +1,38 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { centsToDecimal, decimalToCents } = require("../util/CentConvertor");
+const CustomerSchema = require("./Customer").schema;
+const ItemSchema = require("./Item").schema;
+const { minimumPayment } = require("../util/CalculatePayment");
 
-const transactionSchema = new Schema({
-  customer: {
-    firstName: String,
-    lastName: String,
-    address: {
-      streetAddress: String,
-      city: String,
-      state: String,
-      zipCode: Number,
-      phone: Number
-    }
-  },
+//TODO: validate everything exist in database before save
+const TransactionSchema = new Schema({
+  customer: CustomerSchema,
   cartItems: [
     {
-      item: {
-        sku: String,
-        description: String,
-        picUrl: String,
-        price: Number,
-        available: Number
-      },
+      item: ItemSchema,
       quantity: Number
     }
   ],
   payment: {
-    amountPayed: Number,
-    paymentType: String
+    amountPayed: {
+      type: Number,
+      required: true,
+      validate: {
+        validator: function(proposedPay) {
+          const { cartItems } = this;
+          return proposedPay >= minimumPayment(cartItems);
+        },
+        message: function(props) {
+          return "NOT ENOUGH CASH STRANGER";
+        }
+      }
+    }
   }
 });
 
 // Enable Mongoose getter functions
-transactionSchema.set("toObject", { getters: true });
-transactionSchema.set("toJSON", { getters: true });
+TransactionSchema.set("toObject", { getters: true });
+TransactionSchema.set("toJSON", { getters: true });
 
-module.export = mongoose.model("Transaction", transactionSchema);
+module.exports = mongoose.model("Transaction", TransactionSchema);
