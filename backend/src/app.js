@@ -2,6 +2,7 @@
 const restify = require("restify");
 const CustomerHandler = require("./handlers/CustomerHandler");
 const ItemHandler = require("./handlers/ItemHandler");
+const TransactionHandler = require("./handlers/TransactionHandler");
 
 const server = restify.createServer();
 
@@ -26,5 +27,9 @@ server.get("/items/:id", ItemHandler.getItem);
 server.get("/items/find", ItemHandler.findItem);
 server.put("/items/:id", ItemHandler.updateItem);
 server.del("/items/:id", ItemHandler.deleteItem);
+
+// /transactions routes
+server.get("/transactions", TransactionHandler.getTransactions);
+server.post("/transactions", TransactionHandler.createTransaction);
 
 module.exports = server;
