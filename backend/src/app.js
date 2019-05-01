@@ -1,6 +1,7 @@
 // set up file for restify server
 const restify = require("restify");
 const CustomerHandler = require("./handlers/customer");
+const ItemHandler = require("./handlers/item");
 
 const server = restify.createServer();
 
@@ -16,5 +17,14 @@ server.post("/customers", CustomerHandler.createCustomer);
 server.get("/customers/find", CustomerHandler.findCustomer);
 server.put("/customers/:id", CustomerHandler.updateCustomer);
 server.del("/customers/:id", CustomerHandler.deleteCustomer);
+// TODO: Add getCustomer By ID
+
+// /items routes
+server.get("/items", ItemHandler.getItems);
+server.post("/items", ItemHandler.createItem);
+server.get("/items/:id", ItemHandler.getItem);
+server.get("/items/find", ItemHandler.findItem);
+server.put("/items/:id", ItemHandler.updateItem);
+server.del("/items/:id", ItemHandler.deleteItem);
 
 module.exports = server;
