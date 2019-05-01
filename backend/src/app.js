@@ -1,7 +1,7 @@
 // set up file for restify server
 const restify = require("restify");
-const CustomerHandler = require("./handlers/customer");
-const ItemHandler = require("./handlers/item");
+const CustomerHandler = require("./handlers/CustomerHandler");
+const ItemHandler = require("./handlers/ItemHandler");
 
 const server = restify.createServer();
 
