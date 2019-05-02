@@ -1,5 +1,6 @@
 import useItems from "../hooks/useItems";
 import styled from "styled-components";
+import Link from "next/link";
 
 const ItemTable = () => {
   const items = useItems();
@@ -21,6 +22,15 @@ const ItemTable = () => {
     </table>
   );
 };
+
+// TODO: Make Update links
+function ItemLink({ item, text }) {
+  return (
+    <Link href={`/items/${item._id}`}>
+      <a>{text}</a>
+    </Link>
+  );
+}
 
 const Item = ({ item }) => {
   return (
