@@ -1,12 +1,14 @@
 import Items from "./items";
 import styled from "styled-components";
 import { usePOSState } from "../context/POSContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useItems from "../hooks/useItems";
 
 const ItemCard = styled.article`
   padding: ${props => props.theme.padding};
   background: #fff;
   color: #000;
+  margin: 2rem;
 `;
 
 const ItemSection = styled.section`
@@ -14,12 +16,16 @@ const ItemSection = styled.section`
   flex-flow: row wrap;
   justify-content: space-between;
   padding: ${props => props.theme.padding};
+  overflow-y: auto;
+  max-height: inherit;
 `;
 
 const ItemList = () => {
+  const items = useItems();
+
   return (
     <ItemSection>
-      {Items.map(item => (
+      {items.map(item => (
         <Item item={item} key={item.sku} />
       ))}
     </ItemSection>
@@ -42,7 +48,7 @@ const Item = ({ item }) => {
   return (
     <ItemCard>
       <form onSubmit={submitForm}>
-        <img src={cartItem.picURL} />
+        <img src={cartItem.picUrl} />
         <h3>SKU: {cartItem.sku}</h3>
         <h4>${cartItem.price}</h4>
         <p>{cartItem.description}</p>

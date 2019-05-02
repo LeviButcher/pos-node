@@ -2,7 +2,7 @@ const ItemRepo = require("../repos/ItemRepo");
 
 exports.getItems = async (req, res) => {
   const items = await ItemRepo.getItems();
-  res.send(200, items);
+  res.json(200, items);
 };
 
 exports.createItem = async (req, res) => {

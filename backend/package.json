@@ -14,7 +14,8 @@
   "dependencies": {
     "dotenv": "^7.0.0",
     "mongoose": "^5.5.2",
-    "restify": "^8.3.0"
+    "restify": "^8.3.0",
+    "restify-cors-middleware": "^1.1.1"
   },
   "devDependencies": {
     "jest": "^24.7.1",

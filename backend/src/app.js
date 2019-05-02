@@ -3,14 +3,21 @@ const restify = require("restify");
 const CustomerHandler = require("./handlers/CustomerHandler");
 const ItemHandler = require("./handlers/ItemHandler");
 const TransactionHandler = require("./handlers/TransactionHandler");
+const corsMiddleware = require("restify-cors-middleware");
 
 const server = restify.createServer();
+
+const cors = corsMiddleware({
+  origins: ["*"]
+});
 
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.dateParser());
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.gzipResponse());
 server.use(restify.plugins.bodyParser());
+server.pre(cors.preflight);
+server.use(cors.actual);
 
 // /customer routes
 server.get("/customers", CustomerHandler.getCustomers);

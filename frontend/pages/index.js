@@ -13,14 +13,18 @@ export const TwoPanel = styled.section`
   grid-template-columns: 25% 1fr;
   grid-template-areas: "side main";
   min-height: calc(100vh - 3rem);
+  max-height: calc(100vh - 3rem);
 `;
 
+const MainContent = styled.div`
+  max-height: inherit;
+`;
 const Index = () => (
   <TwoPanel>
     <SidePanel style={{ gridArea: "side" }} />
-    <div style={{ gridArea: "main" }}>
+    <MainContent style={{ gridArea: "main" }}>
       <ItemList />
-    </div>
+    </MainContent>
   </TwoPanel>
 );
 

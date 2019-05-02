@@ -1,6 +1,6 @@
 const Theme = {
   fontSize: "16px",
-  bg: "#dad",
+  bg: "#267340",
   layoutPadding: 0,
   layoutMargin: 0,
   padding: "2rem",
