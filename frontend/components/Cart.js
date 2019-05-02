@@ -12,7 +12,6 @@ const CartSection = styled.section`
 
 const CartContainer = styled.div`
   height: 100%;
-  background: #fff;
   color: #333;
   overflow-y: auto;
   padding: ${props => props.theme.padding};
@@ -34,6 +33,7 @@ const ButtonContainer = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
   grid-gap: 5px;
+  background: #888;
 `;
 
 const CartItem = ({ item }) => (

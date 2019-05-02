@@ -3,10 +3,6 @@ import withLayout from "../components/Layout";
 import SidePanel from "../components/SidePanel";
 import ItemList from "../components/ItemList";
 
-const Title = styled.h1`
-  color: red;
-`;
-
 export const TwoPanel = styled.section`
   display: grid;
   grid-template-rows: 100%;

@@ -9,8 +9,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   html, body {
     background: ${props => props.theme.bg};
-    font: 16px menlo;
-    color: #fff;
+    font: 16px sans;
     margin: ${props => props.theme.layoutMargin};
     padding: ${props => props.theme.layoutPadding};
   }

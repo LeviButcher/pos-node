@@ -1,11 +1,12 @@
 import useItems from "../hooks/useItems";
 import styled from "styled-components";
 import Link from "next/link";
+import Table from "../styled/Table";
 
 const ItemTable = () => {
   const items = useItems();
   return (
-    <table>
+    <Table>
       <thead>
         <tr>
           <th>SKU</th>
@@ -19,7 +20,7 @@ const ItemTable = () => {
           <Item item={item} />
         ))}
       </tbody>
-    </table>
+    </Table>
   );
 };
 
