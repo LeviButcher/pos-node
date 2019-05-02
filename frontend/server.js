@@ -10,6 +10,11 @@ app
   .then(() => {
     const server = express();
 
+    server.get("/items/update/:id", (req, res) => {
+      const page = "/updateItem";
+      app.render(req, res, page, req.params);
+    });
+
     server.get("/items/create", (req, res) => {
       const page = "/createItem";
       app.render(req, res, page);

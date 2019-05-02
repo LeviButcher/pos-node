@@ -21,7 +21,7 @@ const ItemSection = styled.section`
 `;
 
 const ItemList = () => {
-  const items = useItems();
+  const [items] = useItems();
 
   return (
     <ItemSection>
@@ -48,7 +48,7 @@ const Item = ({ item }) => {
   return (
     <ItemCard>
       <form onSubmit={submitForm}>
-        <img src={cartItem.picUrl} />
+        <img src={cartItem.picUrl || "hello"} />
         <h3>SKU: {cartItem.sku}</h3>
         <h4>${cartItem.price}</h4>
         <p>{cartItem.description}</p>
