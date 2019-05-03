@@ -25,8 +25,12 @@ const Nav = () => {
       <Link href="/">
         <a>POS-Node</a>
       </Link>
-      <a>Transactions</a>
-      <a>Customers</a>
+      <Link href="/transactions">
+        <a>Transactions</a>
+      </Link>
+      <Link href="/customers">
+        <a>Customers</a>
+      </Link>
       <Link href="/items">
         <a>Items</a>
       </Link>
