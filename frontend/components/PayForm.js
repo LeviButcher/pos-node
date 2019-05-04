@@ -28,11 +28,12 @@ const PayForm = () => {
     e.preventDefault();
     alert("Add in Are you sure check, CALLING BACKEND");
     const transaction = {
-      customer,
       cartItems: cartItems,
       payment
     };
-    // cartItems should be {item, quantity}
+    if (customer === {}) {
+      transaction.customer = customer;
+    }
     console.log(transaction);
     const res = await fetch(`${publicRuntimeConfig.BACKEND}transactions`, {
       method: "POST",

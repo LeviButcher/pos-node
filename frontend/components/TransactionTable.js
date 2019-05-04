@@ -30,8 +30,12 @@ const Transaction = ({ transaction }) => {
   const { customer, cartItems, payment } = transaction;
   return (
     <tr>
-      <td>{customer.firstName + " " + customer.lastName}</td>
-      <td>{customer.phone}</td>
+      <td>
+        {(customer?.firstName || "None") +
+          " " +
+          (customer?.lastName || "Given")}
+      </td>
+      <td>{customer?.phone || "None"}</td>
       <td>{cartItems.reduce((acc, curr) => curr.quantity + acc, 0)}</td>
       <td>{"output total here"}</td>
       <td>{payment.amountPayed}</td>

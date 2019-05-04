@@ -7,7 +7,10 @@ const { minimumPayment } = require("../util/CalculatePayment");
 
 //TODO: validate everything exist in database before save
 const TransactionSchema = new Schema({
-  customer: CustomerSchema,
+  customer: {
+    type: CustomerSchema,
+    required: false
+  },
   cartItems: [
     {
       item: ItemSchema,

@@ -73,6 +73,24 @@ describe("Transaction Repo", () => {
     }
   });
 
+  test("Create transaction should still create without customer", async () => {
+    const cartItems = seedItems.slice(0, 2).map(item => {
+      return {
+        item,
+        quantity: 1
+      };
+    });
+
+    const transaction = {
+      cartItems,
+      payment: {
+        amountPayed: minimumPayment(cartItems)
+      }
+    };
+    const res = await TransactionRepo.createTransaction(transaction);
+    expect(res.cartItems.length).toEqual(transaction.cartItems.length);
+  });
+
   test("getTransactions should return array of length of seedTransactions", async () => {
     const transactions = await TransactionRepo.getTransactions();
     expect(transactions.length).toBe(seedTransactions.length);
