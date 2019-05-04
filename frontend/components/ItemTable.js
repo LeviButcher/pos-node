@@ -4,6 +4,7 @@ import Link from "next/link";
 import Table from "../styled/Table";
 import getConfig from "next/config";
 const { publicRuntimeConfig } = getConfig();
+import Button from "../styled/Button";
 
 const ItemTable = () => {
   const [items, setRecall] = useItems();
@@ -15,6 +16,8 @@ const ItemTable = () => {
           <th>Description</th>
           <th>Price</th>
           <th>Available</th>
+          <th />
+          <th />
         </tr>
       </thead>
       <tbody>
@@ -25,15 +28,6 @@ const ItemTable = () => {
     </Table>
   );
 };
-
-// TODO: Make Update links
-function ItemLink({ item, text }) {
-  return (
-    <Link href={`/items/${item._id}`}>
-      <a>{text}</a>
-    </Link>
-  );
-}
 
 const Item = ({ item, callBack }) => {
   async function deleteItem(id) {
@@ -56,17 +50,17 @@ const Item = ({ item, callBack }) => {
       <td>{item.price}</td>
       <td>{item.available}</td>
       <td>
-        <button>
+        <Button>
           <Link
             as={`/items/update/${item._id}`}
             href={`/updateItem?id=${item._id}`}
           >
             <a>Update</a>
           </Link>
-        </button>
+        </Button>
       </td>
       <td>
-        <button onClick={() => deleteItem(item._id)}>Delete</button>
+        <Button onClick={() => deleteItem(item._id)}>Delete</Button>
       </td>
     </tr>
   );

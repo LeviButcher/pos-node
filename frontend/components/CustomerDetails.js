@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Popup from "reactjs-popup";
 import CustomerForm from "./CustomerForm";
 import { usePOSState } from "../context/POSContext";
+import Button from "../styled/Button";
 
 const CustomerBox = styled.div`
   background: #888;
@@ -24,7 +25,7 @@ const CustomerDetails = () => {
         <h3>{customer.firstName || "No Customer added"}</h3>
         <h4>{customer.phone || ""}</h4>
       </div>
-      <Popup trigger={<button>Add Customer</button>} modal closeOnDocumentClick>
+      <Popup trigger={<Button>Add Customer</Button>} modal closeOnDocumentClick>
         {close => (
           <CustomerForm
             submitAction={(e, value) => {

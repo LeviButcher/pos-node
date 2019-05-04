@@ -2,6 +2,7 @@ import styled from "styled-components";
 import withLayout from "../components/Layout";
 import ItemTable from "../components/ItemTable";
 import Link from "next/link";
+import Button from "../styled/Button";
 
 const Contained = styled.section`
   padding: ${props => props.theme.padding};
@@ -18,9 +19,11 @@ const ItemsPage = () => {
     <Contained>
       <header>
         <h1>Items in Inventory</h1>
-        <Link href="/items/create">
-          <a>Create Item</a>
-        </Link>
+        <Button>
+          <Link href="/items/create">
+            <a>Create Item</a>
+          </Link>
+        </Button>
       </header>
       <ItemTable />
     </Contained>

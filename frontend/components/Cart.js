@@ -2,6 +2,7 @@ import styled from "styled-components";
 import CustomerDetails from "./CustomerDetails";
 import { usePOSState } from "../context/POSContext";
 import Link from "next/link";
+import Button from "../styled/Button";
 
 const CartSection = styled.section`
   height: 100%;
@@ -63,13 +64,13 @@ const Cart = () => {
         ))}
       </CartContainer>
       <ButtonContainer>
-        <button onClick={() => dispatch({ type: "CLEAR-CART" })}>
+        <Button onClick={() => dispatch({ type: "CLEAR-CART" })}>
           Clear Cart
-        </button>
+        </Button>
         <Link href="/pay">
-          <button>
+          <Button>
             <a>Pay</a>
-          </button>
+          </Button>
         </Link>
       </ButtonContainer>
     </CartSection>

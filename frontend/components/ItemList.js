@@ -5,16 +5,16 @@ import { useState, useEffect } from "react";
 import useItems from "../hooks/useItems";
 
 const ItemCard = styled.article`
-  padding: ${props => props.theme.padding};
-  background: #fff;
-  color: #000;
+  background: #ccc;
   margin: 2rem;
+  width: 250px;
 `;
 
 const ItemSection = styled.section`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  align-items: start;
   padding: ${props => props.theme.padding};
   overflow-y: auto;
   max-height: inherit;

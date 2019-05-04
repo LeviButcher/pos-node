@@ -10,6 +10,7 @@ const TopNav = styled.nav`
   display: flex;
   grid-area: header;
   height: 3rem;
+  align-items: center;
 
   & > a {
     padding-right: 1rem;
