@@ -10,7 +10,9 @@ const PaymentTypes = ["Cash", "Credit Card"];
 
 const PayForm = () => {
   const [{ customer, cartItems }, dispatch] = usePOSState();
-  const minimumOwed = cartItems.reduce(totalCartReducer, 0);
+  const minimumOwed = cartItems
+    .map(ele => ({ price: ele.item.price, quantity: ele.quantity }))
+    .reduce(totalCartReducer, 0);
   const [payment, setPayment] = useState({ amountPayed: minimumOwed });
 
   function updateState(e) {
@@ -24,15 +26,10 @@ const PayForm = () => {
 
   async function submitForm(e) {
     e.preventDefault();
-    //contain logic to check payment amount and items
-
-    //update backend with transaction
-    //wipe cart and customer from app state
-    //reroute to transaction page
     alert("Add in Are you sure check, CALLING BACKEND");
     const transaction = {
       customer,
-      cartItems: massageCartItems(cartItems),
+      cartItems: cartItems,
       payment
     };
     // cartItems should be {item, quantity}
@@ -76,16 +73,5 @@ const PayForm = () => {
     </div>
   );
 };
-
-function massageCartItems(cartItems) {
-  return cartItems.map(item => {
-    const quantity = item.quantity;
-    delete item.quantity;
-    return {
-      quantity,
-      item
-    };
-  });
-}
 
 export default PayForm;

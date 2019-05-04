@@ -23,14 +23,14 @@ export const POSReducer = (state, action) => {
     }
     case "ADD-ITEM": {
       const index = state.cartItems.findIndex(
-        element => element.sku === action.item.sku
+        element => element.item.sku === action.cartItem.item.sku
       );
 
       let cartItemsCopy = state.cartItems;
       if (index != -1) {
-        cartItemsCopy.splice(index, 1, action.item);
+        cartItemsCopy.splice(index, 1, action.cartItem);
       } else {
-        cartItemsCopy = [...cartItemsCopy, action.item];
+        cartItemsCopy = [...cartItemsCopy, action.cartItem];
       }
 
       return {

@@ -37,7 +37,7 @@ const ButtonContainer = styled.div`
   background: #888;
 `;
 
-const CartItem = ({ item }) => (
+const CartItem = ({ cartItem: { item, quantity } }) => (
   <CartItemContainer>
     <div>
       <h6>SKU: {item.sku}</h6>
@@ -45,7 +45,7 @@ const CartItem = ({ item }) => (
     </div>
     <div>
       <p>{item.price}</p>
-      <p># {item.quantity}</p>
+      <p># {quantity}</p>
     </div>
     <button>Drop Item</button>
   </CartItemContainer>
@@ -57,10 +57,15 @@ const Cart = () => {
     <CartSection>
       <CustomerDetails />
       <CartContainer>
-        <p>Total: {cartItems.reduce(totalCartReducer, 0)}</p>
+        <p>
+          Total:
+          {cartItems
+            .map(ele => ({ price: ele.item.price, quantity: ele.quantity }))
+            .reduce(totalCartReducer, 0)}
+        </p>
         <hr />
-        {cartItems.map(item => (
-          <CartItem item={item} />
+        {cartItems.map(cartItem => (
+          <CartItem cartItem={cartItem} />
         ))}
       </CartContainer>
       <ButtonContainer>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { usePOSState } from "../context/POSContext";
 import { useState, useEffect } from "react";
 import useItems from "../hooks/useItems";
+import Button from "../styled/Button";
 
 const ItemCard = styled.article`
   background: #ccc;
@@ -33,36 +34,34 @@ const ItemList = () => {
 };
 
 const Item = ({ item }) => {
-  const [cartItem, setCartItem] = useState(item);
+  const [quantity, setQuantity] = useState(1);
   const [{ items }, dispatch] = usePOSState();
-
-  function changeQuantity(e) {
-    setCartItem({ ...cartItem, quantity: e.target.value });
-  }
 
   function submitForm(e) {
     e.preventDefault();
-    dispatch({ type: "ADD-ITEM", item: cartItem });
+    dispatch({ type: "ADD-ITEM", cartItem: { item, quantity } });
   }
 
   return (
     <ItemCard>
       <form onSubmit={submitForm}>
-        <img src={cartItem.picUrl || "hello"} />
-        <h3>SKU: {cartItem.sku}</h3>
-        <h4>${cartItem.price}</h4>
-        <p>{cartItem.description}</p>
-        <h5>In stock: {cartItem.available}</h5>
-        <label>Add Quantity:</label>
-        <input
-          name="quantity"
-          type="number"
-          min={0}
-          max={cartItem.available}
-          value={cartItem.quantity}
-          onChange={changeQuantity}
-        />
-        <input type="submit" />
+        <img src={item.picUrl || "hello"} />
+        <h3>SKU: {item.sku}</h3>
+        <h4>${item.price}</h4>
+        <p>{item.description}</p>
+        <h5>In stock: {item.available}</h5>
+        <label>Add Quantity</label>
+        {item.available > 0 && (
+          <input
+            name="quantity"
+            type="number"
+            min={1}
+            max={item.available}
+            value={quantity}
+            onChange={e => setQuantity(e.target.value)}
+          />
+        )}
+        <Button type="submit">Add</Button>
       </form>
     </ItemCard>
   );
