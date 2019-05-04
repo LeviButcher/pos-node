@@ -4,11 +4,25 @@ const CustomerHandler = require("./handlers/CustomerHandler");
 const ItemHandler = require("./handlers/ItemHandler");
 const TransactionHandler = require("./handlers/TransactionHandler");
 const corsMiddleware = require("restify-cors-middleware");
+const bunyan = require("bunyan");
+const log = bunyan.createLogger({ name: "POS-REST-API" });
 
-const server = restify.createServer();
+const server = restify.createServer({
+  name: "POS-REST-API",
+  log
+});
 
 const cors = corsMiddleware({
   origins: ["*"]
+});
+
+server.pre(function(request, response, next) {
+  request.log.info({ req: request }, "start"); // (1)
+  return next();
+});
+
+server.on("after", function(req, res, route) {
+  req.log.info({ res: res }, "finished"); // (3)
 });
 
 server.use(restify.plugins.acceptParser(server.acceptable));

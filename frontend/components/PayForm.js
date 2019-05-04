@@ -3,15 +3,10 @@ import { useState } from "react";
 import { totalCartReducer } from "./Cart";
 import { usePOSState } from "../context/POSContext";
 import Router from "next/router";
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 
 const PaymentTypes = ["Cash", "Credit Card"];
-
-// let payment = {
-//   type: "",
-//   amountPayed: "",
-//   creditCardNumber: "",
-//   securityNumber: ""
-// };
 
 const PayForm = () => {
   const [{ customer, cartItems }, dispatch] = usePOSState();
@@ -27,16 +22,38 @@ const PayForm = () => {
     });
   }
 
-  function submitForm(e) {
+  async function submitForm(e) {
     e.preventDefault();
     //contain logic to check payment amount and items
 
     //update backend with transaction
     //wipe cart and customer from app state
     //reroute to transaction page
-    alert("Calling Backend");
-    dispatch({ type: "WIPE" });
-    Router.push("/");
+    alert("Add in Are you sure check, CALLING BACKEND");
+    const transaction = {
+      customer,
+      cartItems: massageCartItems(cartItems),
+      payment
+    };
+    // cartItems should be {item, quantity}
+    console.log(transaction);
+    const res = await fetch(`${publicRuntimeConfig.BACKEND}transactions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(transaction)
+    });
+    if (res.status == 201) {
+      console.log("We GUCCI");
+      // const data = await res.json();
+      console.log(res);
+      dispatch({ type: "WIPE" });
+      Router.push("/");
+    } else {
+      alert("display error messages");
+      console.log(res);
+    }
   }
 
   return (
@@ -59,5 +76,16 @@ const PayForm = () => {
     </div>
   );
 };
+
+function massageCartItems(cartItems) {
+  return cartItems.map(item => {
+    const quantity = item.quantity;
+    delete item.quantity;
+    return {
+      quantity,
+      item
+    };
+  });
+}
 
 export default PayForm;
