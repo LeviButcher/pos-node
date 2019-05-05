@@ -6,15 +6,15 @@
   "scripts": {
     "test": "jest",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js | node_modules/bunyan/bin/bunyan -j",
+    "dev": "nodemon src/index.js",
     "seed": "node src/seed/seed.js"
   },
   "author": "Levi Butcher",
   "license": "MIT",
   "dependencies": {
-    "bunyan": "^1.8.12",
     "dotenv": "^7.0.0",
     "mongoose": "^5.5.2",
+    "morgan": "^1.9.1",
     "restify": "^8.3.0",
     "restify-cors-middleware": "^1.1.1"
   },
