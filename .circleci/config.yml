@@ -19,6 +19,8 @@ jobs:
     steps:
       - checkout
       - run: ls
+      - run: cd backend/
+      - run: ls
       - run: npm install
 
       # run tests!
