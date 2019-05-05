@@ -2,28 +2,10 @@ const request = require("supertest");
 const server = require("../src/app");
 const Item = require("../src/models/Item");
 const seedItems = require("../src/seed/items");
-const dbConnection = require("../src/db");
 
 process.env.TEST_SUITE = "ITEM_API";
 
 describe("Item API /items", () => {
-  beforeEach(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-    await Item.create(seedItems);
-  });
-
-  afterEach(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-  });
-
-  afterAll(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-    db.close();
-  });
-
   test("GET: /items should return items of a count of seedItems", async () => {
     const response = await request(server).get("/items");
     const items = response.body;

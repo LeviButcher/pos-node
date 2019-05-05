@@ -1,4 +1,3 @@
-const dbConnection = require("../src/db");
 const Transaction = require("../src/models/Transaction");
 const Customer = require("../src/models/Customer");
 const Item = require("../src/models/Item");
@@ -12,25 +11,6 @@ const { minimumPayment } = require("../src/util/CalculatePayment");
 process.env.TEST_SUITE = "TRANSACTION_REPO";
 
 describe("Transaction Repo", () => {
-  beforeEach(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-    await Customer.create(seedCustomers);
-    await Item.create(seedItems);
-    await Transaction.create(seedTransactions);
-  });
-
-  afterEach(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-  });
-
-  afterAll(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-    db.close();
-  });
-
   test("Create transaction should return new transaction", async () => {
     const cartItems = seedItems.slice(0, 2).map(item => {
       return {

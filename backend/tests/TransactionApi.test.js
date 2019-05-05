@@ -7,23 +7,6 @@ const dbConnection = require("../src/db");
 process.env.TEST_SUITE = "TRANSACTION_API";
 
 describe("Transaction API /transactions", () => {
-  beforeEach(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-    await Transaction.create(seedTransactions);
-  });
-
-  afterEach(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-  });
-
-  afterAll(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-    db.close();
-  });
-
   test("GET:/transcrations should return array of transactions", async () => {
     const { body: transactions, statusCode } = await request(server).get(
       "/transactions"

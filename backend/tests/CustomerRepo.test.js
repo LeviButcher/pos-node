@@ -1,4 +1,3 @@
-const dbConnection = require("../src/db");
 const Customer = require("../src/models/Customer");
 const CustomerRepo = require("../src/repos/CustomerRepo");
 const seedCustomers = require("../src/seed/customers");
@@ -8,22 +7,6 @@ const ObjectId = mongoose.Types.ObjectId;
 process.env.TEST_SUITE = "CUSTOMER_REPO";
 
 describe("Customer Repo", () => {
-  beforeEach(async () => {
-    await dbConnection();
-    await Customer.create(seedCustomers);
-  });
-
-  afterEach(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-  });
-
-  afterAll(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-    db.close();
-  });
-
   test("createCustomer add new customer should pass", async () => {
     const cust = new Customer({
       firstName: "Bob",

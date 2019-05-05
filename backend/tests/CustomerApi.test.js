@@ -2,28 +2,10 @@ const request = require("supertest");
 const server = require("../src/app");
 const Customer = require("../src/models/Customer");
 const seedCustomers = require("../src/seed/customers");
-const dbConnection = require("../src/db");
 
 process.env.TEST_SUITE = "CUSTOMER_API";
 
 describe("Customer API /customer", () => {
-  beforeEach(async () => {
-    const db = await dbConnection();
-    await db.dropDatabase();
-    await Customer.create(seedCustomers);
-  });
-
-  afterEach(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-  });
-
-  afterAll(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-    db.close();
-  });
-
   test("GET:/customers should return array", async () => {
     const res = await request(server).get("/customers");
     expect(res.body).toBeInstanceOf(Array);

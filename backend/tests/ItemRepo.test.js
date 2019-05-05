@@ -1,4 +1,3 @@
-const dbConnection = require("../src/db");
 const Item = require("../src/models/Item");
 const ItemRepo = require("../src/repos/ItemRepo");
 const mongoose = require("mongoose");
@@ -8,23 +7,6 @@ const seedItems = require("../src/seed/items");
 process.env.TEST_SUITE = "ITEM_REPO";
 
 describe("Item Repo", () => {
-  beforeEach(async () => {
-    const db = await dbConnection();
-    await db.dropDatabase();
-    await Item.create(seedItems);
-  });
-
-  afterEach(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-  });
-
-  afterAll(async () => {
-    db = await dbConnection();
-    await db.dropDatabase();
-    db.close();
-  });
-
   test("CreateItem should create a new item", async () => {
     const newItem = {
       sku: "13546",
