@@ -1,5 +1,7 @@
 const dbConnection = require("../src/db");
 const Transaction = require("../src/models/Transaction");
+const Customer = require("../src/models/Customer");
+const Item = require("../src/models/Item");
 const TransactionRepo = require("../src/repos/TransactionRepo");
 const mongoose = require("mongoose");
 const seedItems = require("../src/seed/items");
@@ -13,6 +15,8 @@ describe("Transaction Repo", () => {
   beforeEach(async () => {
     db = await dbConnection();
     await db.dropDatabase();
+    await Customer.create(seedCustomers);
+    await Item.create(seedItems);
     await Transaction.create(seedTransactions);
   });
 
@@ -94,5 +98,51 @@ describe("Transaction Repo", () => {
   test("getTransactions should return array of length of seedTransactions", async () => {
     const transactions = await TransactionRepo.getTransactions();
     expect(transactions.length).toBe(seedTransactions.length);
+  });
+
+  test("createTransaction should take away the number of available items from Item purchased", async () => {
+    const item = (await Item.find({}))[0];
+    const amountBought = 1;
+    const customer = seedCustomers[0];
+    const transaction = {
+      customer,
+      cartItems: [
+        {
+          item,
+          quantity: amountBought
+        }
+      ],
+      payment: {
+        amountPayed: 10000
+      }
+    };
+    const res = await TransactionRepo.createTransaction(transaction);
+    const updatedItem = await Item.findById(item._id);
+    expect(updatedItem.available).toBe(item.available - amountBought);
+  });
+
+  test("createTransaction should create a new customer", async () => {
+    const item = (await Item.find({}))[0];
+    const amountBought = 1;
+    const customer = {
+      firstName: "Bill",
+      lastName: "Bill",
+      phone: "304-896-4216"
+    };
+    const transaction = {
+      customer,
+      cartItems: [
+        {
+          item,
+          quantity: amountBought
+        }
+      ],
+      payment: {
+        amountPayed: 10000
+      }
+    };
+    const res = await TransactionRepo.createTransaction(transaction);
+    const createCustomer = await Customer.findOne(customer);
+    expect(createCustomer.phone).toBe(customer.phone);
   });
 });

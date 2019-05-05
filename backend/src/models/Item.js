@@ -23,11 +23,13 @@ const ItemSchema = new Schema({
     type: Number,
     min: 0,
     get: centsToDecimal,
-    set: decimalToCents
+    set: decimalToCents,
+    required: true
   },
   available: {
     type: Number,
-    min: 0
+    min: 0,
+    required: true
   }
 });
 
