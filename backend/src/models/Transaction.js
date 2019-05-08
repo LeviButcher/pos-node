@@ -38,6 +38,7 @@ const TransactionSchema = new Schema({
 
 TransactionSchema.post("save", async function(doc) {
   //iterate over cartItems, update each Item document with a new available taking out quantity
+  const dbPromises = [];
   const updateItems = doc.cartItems.map(cartItem => {
     const item = cartItem.item;
     item.available -= cartItem.quantity;
@@ -51,7 +52,7 @@ TransactionSchema.post("save", async function(doc) {
       }
     };
   });
-  await Item.bulkWrite(updateCommand);
+  dbPromises.push(Item.bulkWrite(updateCommand));
   //ensure customer exists and is created
   const customer = doc.customer;
 
@@ -69,9 +70,10 @@ TransactionSchema.post("save", async function(doc) {
         phone: customer.phone,
         address: customer.address
       };
-      await Customer.create(newCustomer);
+      dbPromises.push(Customer.create(newCustomer));
     }
   }
+  await Promise.all(dbPromises);
 });
 
 // Enable Mongoose getter functions
