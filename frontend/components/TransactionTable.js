@@ -1,5 +1,12 @@
-import Table from "../styled/Table";
 import useTransactions from "../hooks/useTransactions";
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Button
+} from "@material-ui/core";
 
 const TransactionTable = () => {
   const [transactions] = useTransactions();
@@ -7,20 +14,20 @@ const TransactionTable = () => {
   return (
     <div>
       <Table>
-        <thead>
-          <tr>
-            <th>Full Name</th>
-            <th>Phone</th>
-            <th>Number of items</th>
-            <th>Total</th>
-            <th>Amount Payed</th>
-          </tr>
-        </thead>
-        <tbody>
+        <TableHead>
+          <TableRow>
+            <TableCell>Full Name</TableCell>
+            <TableCell>Phone</TableCell>
+            <TableCell>Number of items</TableCell>
+            <TableCell>Total</TableCell>
+            <TableCell>Amount Payed</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {transactions.map(transact => (
             <Transaction transaction={transact} key={transact._id} />
           ))}
-        </tbody>
+        </TableBody>
       </Table>
     </div>
   );
@@ -29,17 +36,19 @@ const TransactionTable = () => {
 const Transaction = ({ transaction }) => {
   const { customer, cartItems, payment } = transaction;
   return (
-    <tr>
-      <td>
+    <TableRow>
+      <TableCell>
         {(customer?.firstName || "None") +
           " " +
           (customer?.lastName || "Given")}
-      </td>
-      <td>{customer?.phone || "None"}</td>
-      <td>{cartItems.reduce((acc, curr) => curr.quantity + acc, 0)}</td>
-      <td>{"output total here"}</td>
-      <td>{payment.amountPayed}</td>
-    </tr>
+      </TableCell>
+      <TableCell>{customer?.phone || "None"}</TableCell>
+      <TableCell>
+        {cartItems.reduce((acc, curr) => curr.quantity + acc, 0)}
+      </TableCell>
+      <TableCell>{"output total here"}</TableCell>
+      <TableCell>{payment.amountPayed}</TableCell>
+    </TableRow>
   );
 };
 

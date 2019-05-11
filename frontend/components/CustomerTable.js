@@ -1,26 +1,33 @@
-import Table from "../styled/Table";
 import useCustomers from "../hooks/useCustomers";
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Button
+} from "@material-ui/core";
 
 const CustomerTable = () => {
   const [customers] = useCustomers();
   return (
     <div>
       <Table>
-        <thead>
-          <tr>
-            <th>Full Name</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
-          </tr>
-        </thead>
-        <tbody>
+        <TableHead>
+          <TableRow>
+            <TableCell>Full Name</TableCell>
+            <TableCell>Phone</TableCell>
+            <TableCell>Address</TableCell>
+            <TableCell>City</TableCell>
+            <TableCell>State</TableCell>
+            <TableCell>Zip</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {customers.map(cust => (
             <Customer customer={cust} />
           ))}
-        </tbody>
+        </TableBody>
       </Table>
     </div>
   );
@@ -29,14 +36,14 @@ const CustomerTable = () => {
 const Customer = ({ customer }) => {
   const { address } = customer;
   return (
-    <tr>
-      <td>{customer.firstName + " " + customer.lastName}</td>
-      <td>{customer.phone}</td>
-      <td>{address.streetAddress}</td>
-      <td>{address.city}</td>
-      <td>{address.state}</td>
-      <td>{address.zip}</td>
-    </tr>
+    <TableRow>
+      <TableCell>{customer.firstName + " " + customer.lastName}</TableCell>
+      <TableCell>{customer.phone}</TableCell>
+      <TableCell>{address.streetAddress}</TableCell>
+      <TableCell>{address.city}</TableCell>
+      <TableCell>{address.state}</TableCell>
+      <TableCell>{address.zip}</TableCell>
+    </TableRow>
   );
 };
 
