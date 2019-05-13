@@ -6,19 +6,25 @@
   "scripts": {
     "test": "jest",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "dev": "DEBUG=app nodemon src/index.js",
     "seed": "node src/seed/seed.js"
   },
   "author": "Levi Butcher",
   "license": "MIT",
   "dependencies": {
+    "debug": "^4.1.1",
     "dotenv": "^7.0.0",
     "mongoose": "^5.5.2",
     "morgan": "^1.9.1",
     "restify": "^8.3.0",
-    "restify-cors-middleware": "^1.1.1"
+    "restify-cors-middleware": "^1.1.1",
+    "restify-errors": "^8.0.0"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jest": "^22.5.1",
     "jest": "^24.7.1",
     "mongodb-memory-server": "^5.1.0",
     "nodemon": "^1.18.11",
