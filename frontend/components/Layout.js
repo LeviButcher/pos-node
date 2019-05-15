@@ -9,8 +9,6 @@ import Theme from "./Theme";
  */
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Roboto');
-
   html, body {
     background: ${props => props.theme.bg};
     font: 16px sans;

@@ -1,15 +1,12 @@
-module.exports = function(wallaby) {
+module.exports = function () {
   return {
-    files: ["src/**/*.js"],
+    files: ['src/**/*.js', 'tests/setup.js', 'jest.config.js'],
 
-    tests: ["tests/**/*test.js"],
-    testFramework: "jest",
+    tests: ['tests/**/*test.js'],
+    testFramework: 'jest',
     env: {
-      type: "node",
-      runner: "node"
+      type: 'node',
+      runner: 'node',
     },
-    setup: function(wallaby) {
-      require("dotenv").config();
-    }
   };
 };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Form, Input, Label } from "../styled/Form";
 import Spacer from "../styled/Spacer";
+import { TextField, InputAdornment, Button } from "@material-ui/core";
 
 const CustomerForm = ({ submitAction }) => {
   const [customer, setCustomer] = useState({});
@@ -21,26 +22,53 @@ const CustomerForm = ({ submitAction }) => {
         <header>
           <h2>Add New Customer</h2>
         </header>
-        <Label htmlFor="firstName">First Name</Label>
-        <Input id="firstName" name="firstName" onChange={handleInput} />
-        <Label htmlFor="lastName">Last Name</Label>
-        <Input id="lastName" name="lastName" onChange={handleInput} />
-        <Label htmlFor="streetAddress">Street Address</Label>
-        <Input id="streetAddress" name="streetAddress" onChange={handleInput} />
-        <Label htmlFor="city">City</Label>
-        <Input id="city" name="city" onChange={handleInput} />
-        <Label htmlFor="state">State</Label>
-        <Input id="state" name="state" onChange={handleInput} />
-        <Label htmlFor="zipCode">Zip Code</Label>
-        <Input
-          id="zipCode"
-          name="zipCode"
-          type="number"
+        <TextField
+          id="firstName"
+          label="First Name"
           onChange={handleInput}
+          margin="normal"
         />
-        <Label htmlFor="phone">Phone Number</Label>
-        <Input id="phone" name="phone" type="tel" onChange={handleInput} />
-        <Input type="submit" />
+        <TextField
+          id="lastName"
+          label="Last Name"
+          onChange={handleInput}
+          margin="normal"
+        />
+        <TextField
+          id="streetAddress"
+          label="Street Address"
+          onChange={handleInput}
+          margin="normal"
+        />
+        <TextField
+          id="city"
+          label="City"
+          onChange={handleInput}
+          margin="normal"
+        />
+        <TextField
+          id="state"
+          label="State"
+          onChange={handleInput}
+          margin="normal"
+        />
+        <TextField
+          id="zipCode"
+          label="Zip Code"
+          type="Number"
+          onChange={handleInput}
+          margin="normal"
+        />
+        <TextField
+          id="phone"
+          label="Phone"
+          type="tel"
+          onChange={handleInput}
+          margin="normal"
+        />
+        <Button color="primary" variant="contained" type="submit">
+          Submit
+        </Button>
       </Form>
     </Spacer>
   );

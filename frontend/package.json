@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
     "babel-plugin-styled-components": "^1.10.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
